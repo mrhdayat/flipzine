@@ -10,7 +10,6 @@ const heroContainer = {
     opacity: 1,
     transition: {
       duration: 0.6,
-      ease: [0.4, 0, 0.2, 1], // easeOut
       staggerChildren: 0.3
     }
   }
@@ -22,8 +21,7 @@ const heroTitle = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.4, 0, 0.2, 1] // easeOut
+      duration: 0.6
     }
   }
 }
@@ -34,8 +32,7 @@ const heroSubtitle = {
     opacity: 0.45,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: [0.4, 0, 0.2, 1] // easeOut
+      duration: 0.5
     }
   }
 }
@@ -45,15 +42,13 @@ const scrollIndicator = {
   show: {
     opacity: 0.3,
     transition: {
-      duration: 0.4,
-      ease: [0.4, 0, 0.2, 1] // easeOut
+      duration: 0.4
     }
   },
   animate: {
     y: [0, 4, 0],
     transition: {
       duration: 1.8,
-      ease: [0.42, 0, 0.58, 1], // easeInOut
       repeat: Infinity
     }
   }
@@ -65,7 +60,6 @@ const ambientLight = {
     opacity: 0.7,
     transition: {
       duration: 1.2,
-      ease: [0.4, 0, 0.2, 1], // easeOut
       delay: 0.4
     }
   },
@@ -73,7 +67,6 @@ const ambientLight = {
     opacity: [0.7, 0.85, 0.7],
     transition: {
       duration: 8,
-      ease: [0.42, 0, 0.58, 1], // easeInOut
       repeat: Infinity
     }
   }

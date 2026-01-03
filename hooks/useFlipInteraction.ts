@@ -26,7 +26,7 @@ export function useFlipInteraction(totalPages: number) {
   const dragStartX = useRef(0)
   const dragStartTime = useRef(0)
   const lastDragX = useRef(0)
-  const animationFrame = useRef<number>()
+  const animationFrame = useRef<number>(0)
 
   const easeInOutCubic = (t: number): number => {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
