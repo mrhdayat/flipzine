@@ -1,26 +1,329 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =====================================================
+   FLIPZINE - ULTRA-MINIMAL EDITORIAL DESIGN SYSTEM
+   Philosophy: Less UI, more space
+   ===================================================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply box-border m-0 p-0;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-[#0A0A0A] text-white font-normal leading-relaxed overflow-x-hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Typography Scale */
+  h1 {
+    @apply text-[48px] font-semibold leading-tight tracking-tight;
+  }
+
+  h2 {
+    @apply text-[28px] font-medium leading-snug;
+  }
+
+  p {
+    @apply text-[16px] font-normal leading-relaxed;
+  }
+
+  small {
+    @apply text-[13px] font-normal;
+  }
+
+  /* Links - Text only, no buttons */
+  a {
+    @apply text-white transition-opacity duration-200;
+  }
+
+  a:hover {
+    @apply opacity-100 underline decoration-1 underline-offset-4;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+
+  /* Text Opacity Levels */
+  .text-primary {
+    @apply text-white;
+  }
+
+  .text-secondary {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .text-tertiary {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Dividers */
+  .divider {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Minimal Input - Underline only */
+  .input-minimal {
+    @apply w-full bg-transparent border-0 border-b pb-2 px-0 text-white outline-none transition-colors duration-200;
+    border-color: rgba(255, 255, 255, 0.2);
+    background-color: transparent !important;
+  }
+
+  .input-minimal:focus {
+    @apply border-white;
+    background-color: transparent !important;
+  }
+
+  .input-minimal::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Remove autofill background */
+  .input-minimal:-webkit-autofill,
+  .input-minimal:-webkit-autofill:hover,
+  .input-minimal:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #0A0A0A inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* Animations - Ultra Minimal & Professional */
+
+  /* Film Grain Background */
+  .film-grain {
+    @apply fixed inset-0 pointer-events-none z-50;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' /%3E%3C/svg%3E");
+  }
+
+  /* Staggered Fade In - Landing Page */
+  .fade-in {
+    animation: fadeIn 600ms ease-out forwards;
+    opacity: 0;
+  }
+
+  .fade-in-delay-1 {
+    animation: fadeIn 600ms ease-out 300ms forwards;
+    opacity: 0;
+  }
+
+  .fade-in-delay-2 {
+    animation: fadeIn 600ms ease-out 600ms forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Ambient Pulse - Subtle breathing effect */
+  .ambient-pulse {
+    animation: ambientPulse 8s ease-in-out infinite;
+  }
+
+  @keyframes ambientPulse {
+
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  /* Scroll Indicator Micro Loop */
+  .scroll-indicator {
+    animation: scrollBounce 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(2px);
+    }
+  }
+
+  /* Page Transition */
+  .page-transition-exit {
+    animation: pageExit 400ms ease-out forwards;
+  }
+
+  .page-transition-enter {
+    animation: pageEnter 400ms ease-out forwards;
+  }
+
+  @keyframes pageExit {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Hover Underline Reveal */
+  .hover-underline {
+    @apply relative;
+  }
+
+  .hover-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-150;
+  }
+
+  .hover-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Focus State - Input */
+  .input-minimal:focus {
+    animation: inputFocus 200ms ease-out;
+  }
+
+  @keyframes inputFocus {
+    from {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    to {
+      border-color: rgba(255, 255, 255, 1);
+    }
+  }
+
+  /* Loading Text Crossfade */
+  .text-crossfade-enter {
+    animation: textFadeIn 200ms ease-out;
+  }
+
+  .text-crossfade-exit {
+    animation: textFadeOut 200ms ease-out;
+  }
+
+  @keyframes textFadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes textFadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Dashboard Load In */
+  .dashboard-enter {
+    animation: dashboardEnter 500ms ease-out;
+  }
+
+  @keyframes dashboardEnter {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Magazine 3D Intro */
+  .magazine-intro {
+    animation: magazineIntro 700ms ease-out;
+  }
+
+  @keyframes magazineIntro {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Controls Auto-hide */
+  .controls-fade {
+    transition: opacity 300ms ease-out;
+  }
+
+  /* Ambient Light - Spotlight Effect */
+  .ambient-light {
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(circle at 50% 40%,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.04) 40%,
+        rgba(0, 0, 0, 0.8) 70%);
+  }
+
+  /* Background Typography Art - Ultra subtle */
+  .bg-typography {
+    @apply fixed inset-0 pointer-events-none select-none overflow-hidden;
+    opacity: 0.04;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(255, 255, 255, 0.15);
+    @apply text-white;
+  }
 }
